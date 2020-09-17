@@ -40,7 +40,6 @@ class ThoughtController extends AbstractController
      * @Route("/api/thoughts", name="api_fetch_all_thoughts", methods={"GET"})
      * 
      * @param Request $request
-     * @param ThoughtRepository $thoughtRepository
      * @return JsonResponse
      */
     public function index(Request $request)
