@@ -85,6 +85,12 @@ class Thought implements \JsonSerializable
     }
 
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+    
     /**
      * Serialize entity.
      * 
@@ -92,9 +98,6 @@ class Thought implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        $this->updated_at = $updated_at;
-
-        return $this;
         return [
             'id' => $this->getId(),
             'user' => $this->getUser(),
