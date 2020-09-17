@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ThoughtRepository::class)
  */
-class Thought
+class Thought implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -85,9 +85,22 @@ class Thought
     }
 
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    /**
+     * Serialize entity.
+     * 
+     * @return array
+     */
+    public function jsonSerialize()
     {
         $this->updated_at = $updated_at;
 
         return $this;
+        return [
+            'id' => $this->getId(),
+            'user' => $this->getUser(),
+            'comment' => $this->getComment(),
+            'created_at' => $this->getCreatedAt(),
+            'updated_at' => $this->getUpdatedAt(),
+        ];
     }
 }
