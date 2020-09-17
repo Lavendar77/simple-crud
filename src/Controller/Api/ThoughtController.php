@@ -39,12 +39,13 @@ class ThoughtController extends AbstractController
      * 
      * @Route("/api/thoughts", name="api_fetch_all_thoughts", methods={"GET"})
      * 
-     * @param Request $request
      * @return JsonResponse
      */
-    public function index(Request $request)
+    public function index()
     {
-        $thoughts = $this->thoughtRepository->findAll();
+        $thoughts = $this->thoughtRepository->findBy([
+            'user' => $this->getUser()
+        ]);
 
         return new JsonResponse([
         	'message' => 'Thoughts fetched successfully.',
@@ -67,7 +68,7 @@ class ThoughtController extends AbstractController
     	$thought = new Thought();
     	$thought
 	    	->setComment($request->get('comment'))
-	    	->setUser($this->userRepository->find(1)); // WIP
+	    	->setUser($this->getUser());
 
     	$this->entityManagerInterface->persist($thought);
     	$this->entityManagerInterface->flush();
@@ -85,13 +86,15 @@ class ThoughtController extends AbstractController
      *
      * @Route("/api/thoughts/{id}", name="api_fetch_thought", methods={"GET"})
      * 
-     * @param Request $request
-     * @param string $id
+     * @param int $id
      * @return JsonResponse
      */
-    public function show(Request $request, string $id)
+    public function show(int $id)
     {
-    	$thought = $this->thoughtRepository->find($id);
+    	$thought = $this->thoughtRepository->findBy([
+            'user' => $this->getUser(),
+            'id' => $id
+        ]);
 
     	if (!$thought) {
     		return new JsonResponse([
@@ -113,12 +116,15 @@ class ThoughtController extends AbstractController
      * @Route("/api/thoughts/{id}", name="api_update_thought", methods={"PUT"})
      * 
      * @param Request $request
-     * @param string $id
+     * @param int $id
      * @return JsonResponse
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
-    	$thought = $this->thoughtRepository->find($id);
+    	$thought = $this->thoughtRepository->findOneBy([
+            'user' => $this->getUser(),
+            'id' => $id
+        ]);
 
     	if (!$thought) {
     		return new JsonResponse([
@@ -144,13 +150,15 @@ class ThoughtController extends AbstractController
      *
      * @Route("/api/thoughts/{id}", name="api_delete_thought", methods={"DELETE"})
      * 
-     * @param Request $request
-     * @param string $id
+     * @param int $id
      * @return JsonResponse
      */
-    public function destroy(Request $request, string $id)
+    public function destroy(int $id)
     {
-    	$thought = $this->thoughtRepository->find($id);
+    	$thought = $this->thoughtRepository->findOneBy([
+            'user' => $this->getUser(),
+            'id' => $id
+        ]);
 
     	if (!$thought) {
     		return new JsonResponse([
