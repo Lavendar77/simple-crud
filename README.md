@@ -11,14 +11,16 @@ I like to call them **thoughts**.
 This project is developed using Symfony (4). And just for practice.
 
 # API Documentation
-[Via Postman](https://www.getpostman.com/collections/59b503f781c042491980)
+[Via Postman](#)
 
 # How It Works
 ## Authentication
-- Create an account (first_name, last_name, username, password)
-- Login (username, password)
+- Create an account (`first_name`, `last_name`, `username`, `password`, `created_at`, `updated_at`)
+- Login (`username`, `password`)
 
 ## Main Operation
+Thought::entity - `id`, `user_id`, `comment`, `created_at`, `updated_at`
+
 - List all your thoughts (GET `/thoughts`)
 - Store a thought (POST `/thoughts`)
 - Show a thought (GET `/thoughts/{thought}`)
