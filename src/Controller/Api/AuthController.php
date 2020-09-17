@@ -63,10 +63,10 @@ class AuthController extends AbstractController
      */
     public function login(Request $request)
     {
-        $username = $request->get('username');
-        $password = $request->get('password');
-
-        $user = $this->userRepository->findByUsernameAndPassword($username, $password);
+        $user = $this->userRepository->findOneBy([
+            'username' => $request->get('username'),
+            'password' => $request->get('password')
+        ]);
 
         if (!$user) {
             return new JsonResponse([

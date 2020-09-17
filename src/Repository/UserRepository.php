@@ -17,23 +17,7 @@ class UserRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
-    }
-
-    /**
-     * @return User[] Returns an array of User objects
-     */
-    public function findByUsernameAndPassword($username, $password)
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.username = :username')
-            ->setParameter('username', $username)
-            ->andWhere('u.password = :password')
-            ->setParameter('password', $password)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    
+    }    
 
     /*
     public function findOneBySomeField($value): ?User
