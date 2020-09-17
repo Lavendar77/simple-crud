@@ -5,13 +5,14 @@ namespace App\Controller\Api\Auth;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RegisterController extends AbstractController
 {
@@ -19,24 +20,28 @@ class RegisterController extends AbstractController
     private EntityManagerInterface $entityManagerInterface;
     private ValidatorInterface $validatorInterface;
     private UserPasswordEncoderInterface $passwordEncoder;
+    private JWTTokenManagerInterface $JWTManager;
 
     /**
      * @param UserRepository $userRepository
      * @param EntityManagerInterface $entityManagerInterface
      * @param ValidatorInterface $validatorInterface
      * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param JWTTokenManagerInterface $JWTManager
      */
     public function __construct(
         UserRepository $userRepository,
         EntityManagerInterface $entityManagerInterface,
         ValidatorInterface $validatorInterface,
-        UserPasswordEncoderInterface $passwordEncoder
+        UserPasswordEncoderInterface $passwordEncoder,
+        JWTTokenManagerInterface $JWTManager
     )
     {
         $this->userRepository = $userRepository;
         $this->entityManagerInterface = $entityManagerInterface;
         $this->validatorInterface = $validatorInterface;
         $this->passwordEncoder = $passwordEncoder;
+        $this->JWTManager = $JWTManager;
     }
 
     /**
@@ -65,9 +70,11 @@ class RegisterController extends AbstractController
         $this->entityManagerInterface->persist($user);
         $this->entityManagerInterface->flush();
 
+        $token = $this->JWTManager->create($user);
+
         return new JsonResponse([
         	'message' => 'Registration successful.',
-        	'token' => '{{token}}'
+        	'token' => $token
         ]);
     }
 }
