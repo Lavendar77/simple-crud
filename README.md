@@ -15,8 +15,8 @@ This project is developed using Symfony (4). And just for practice.
 
 # How It Works
 ## Authentication
-- Create an account (`first_name`, `last_name`, `username`, `password`, `created_at`, `updated_at`)
-- Login (`username`, `password`)
+- Create an account (`first_name`, `last_name`, `email`, `password`, `created_at`, `updated_at`)
+- Login (`email`, `password`)
 
 ## Main Operation
 Thought::entity - `id`, `user_id`, `comment`, `created_at`, `updated_at`
