@@ -6,6 +6,9 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -57,6 +60,18 @@ class User  implements \JsonSerializable
     public function __construct()
     {
         $this->thoughts = new ArrayCollection();
+    }
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('first_name', new NotBlank());
+        $metadata->addPropertyConstraint('last_name', new NotBlank());
+        $metadata->addPropertyConstraint('username', new NotBlank());
+        $metadata->addPropertyConstraint('password', new NotBlank());
+
+        $metadata->addConstraint(new UniqueEntity([
+            'fields' => 'username',
+        ]));
     }
 
     public function getId(): ?int

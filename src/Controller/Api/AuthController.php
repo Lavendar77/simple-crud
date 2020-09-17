@@ -10,20 +10,28 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AuthController extends AbstractController
 {
     private UserRepository $userRepository;
     private EntityManagerInterface $entityManagerInterface;
+    private ValidatorInterface $validatorInterface;
 
     /**
      * @param UserRepository $userRepository
      * @param EntityManagerInterface $entityManagerInterface
+     * @param ValidatorInterface $validatorInterface
      */
-    public function __construct(UserRepository $userRepository, EntityManagerInterface $entityManagerInterface)
+    public function __construct(
+        UserRepository $userRepository,
+        EntityManagerInterface $entityManagerInterface,
+        ValidatorInterface $validatorInterface
+    )
     {
         $this->userRepository = $userRepository;
         $this->entityManagerInterface = $entityManagerInterface;
+        $this->validatorInterface = $validatorInterface;
     }
 
     /**
@@ -43,6 +51,13 @@ class AuthController extends AbstractController
             ->setUsername($request->get('username'))
             ->setPassword($request->get('password')) // WIP: Encrypt password
         ;
+
+        $errors = $this->validatorInterface->validate($user);
+        if (count($errors) > 0) {
+            return new JsonResponse([
+                'errors' => (string) $errors
+            ], Response::HTTP_BAD_REQUEST);
+        }
 
         $this->entityManagerInterface->persist($user);
         $this->entityManagerInterface->flush();
