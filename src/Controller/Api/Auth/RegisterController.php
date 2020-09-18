@@ -74,7 +74,10 @@ class RegisterController extends AbstractController
 
         return new JsonResponse([
         	'message' => 'Registration successful.',
-        	'token' => $token
+        	'data' => [
+                'user' => $user,
+                'token' => $token
+            ]
         ]);
     }
 }

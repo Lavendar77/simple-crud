@@ -98,8 +98,9 @@ class ThoughtController extends AbstractController
 
     	if (!$thought) {
     		return new JsonResponse([
-	        	'message' => 'Resource does not exist.'
-	        ], 404);
+	        	'message' => 'Resource does not exist.',
+                'data' => null
+	        ], Response::HTTP_NOT_FOUND);
     	}
 
     	return new JsonResponse([
@@ -128,8 +129,9 @@ class ThoughtController extends AbstractController
 
     	if (!$thought) {
     		return new JsonResponse([
-	        	'message' => 'Resource does not exist.'
-	        ], 404);
+	        	'message' => 'Resource does not exist.',
+                'data' => null
+	        ], Response::HTTP_NOT_FOUND);
     	}
 
     	$thought->setComment($request->get('comment'));
@@ -162,15 +164,17 @@ class ThoughtController extends AbstractController
 
     	if (!$thought) {
     		return new JsonResponse([
-	        	'message' => 'Resource does not exist.'
-	        ], 404);
+	        	'message' => 'Resource does not exist.',
+                'data' => null
+	        ], Response::HTTP_NOT_FOUND);
     	}
 
     	$this->entityManagerInterface->remove($thought);
 		$this->entityManagerInterface->flush();
 
     	return new JsonResponse([
-        	'message' => 'Thought deleted successfully.'
+        	'message' => 'Thought deleted successfully.',
+            'data' => null
         ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProfileController extends AbstractController
@@ -17,8 +18,13 @@ class ProfileController extends AbstractController
      */
     public function index()
     {
+        $user = $this->getUser();
+
         return new JsonResponse([
-            'user' => $this->getUser()
-        ]);
+            'message' => 'Profile fetched successfully.',
+            'data' => [
+                'user' => $user
+            ]
+        ], $user ? Response::HTTP_OK : Response::HTTP_UNAUTHORIZED);
     }
 }
