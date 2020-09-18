@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * @ORM\Table(name="thoughts")
  * @ORM\Entity(repositoryClass=ThoughtRepository::class)
  * @ORM\HasLifecycleCallbacks()
  */
