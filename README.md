@@ -9,21 +9,32 @@ I like to call them **thoughts**.
 3. [How It Works](#how-it-works)
 
 # Development
-This project is developed using Symfony (4). And just for practice.
+This project is developed using Symfony (4).
 
 ## Setup
 1. Install dependencies
 ```bash
 composer install
 ```
-2. Generate the SSH keys:
+
+2. Database configuration
+	- Configure your **.env**: `DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name`
+	- Create the database: `php bin/console doctrine:database:create`
+	- Create the database schema: `php bin/console doctrine:schema:create`
+
+3. Generate the SSH keys (for JWT Token Configuration):
 ```bash
 $ mkdir -p config/jwt
 $ openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
 $ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 ```
-*However, I used **PuttyGen** to generate a key and saved the private key as `private.pem`. Then, ran the second command:
+*In my case, I used **PuttyGen** to generate a key and saved the private key as `private.pem`. Then, ran the second command:
 `openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout`*.
+
+4. Start your server
+```bash
+symfony serve:start --no-tls`
+```
 
 # API Documentation
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/7154640/TVKBXHZa)
