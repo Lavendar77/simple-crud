@@ -41,6 +41,3 @@ $ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 - Show a thought (GET `/thoughts/{thought}`)
 - Edit a thought (PUT `/thoughts/{thought}`)
 - Delete a thought (DELETE `/thoughts/{thought}`)
-
-# WIP
-- Timestamps in entities.
