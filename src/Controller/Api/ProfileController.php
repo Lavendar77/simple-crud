@@ -26,6 +26,6 @@ class ProfileController extends AbstractController
             'data' => [
                 'user' => $user
             ]
-        ], $user ? Response::HTTP_OK : Response::HTTP_UNAUTHORIZED);
+        ], Response::HTTP_OK);
     }
 }
