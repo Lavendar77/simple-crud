@@ -52,3 +52,14 @@ symfony serve:start --no-tls`
 - Show a thought (GET `/thoughts/{thought}`)
 - Edit a thought (PUT `/thoughts/{thought}`)
 - Delete a thought (DELETE `/thoughts/{thought}`)
+
+# Testing
+Okay, so testing has been stressful and quite annoying to be frank 🙄<br>
+But we'll pull through 🚀
+
+## Functional Tests
+For now, only functional tests are available. Codebase is still a bit buggy, but one step at a time.
+- Registration
+Testing for both successful and failed requests.
+- Login
+Testing for both successful and failed requests.
