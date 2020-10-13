@@ -3,39 +3,12 @@
 namespace App\Tests\Controller\Api\Auth;
 
 use App\Repository\UserRepository;
+use App\Tests\Library\UserAuthentication;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 class LoginUserTest extends WebTestCase
 {
-	/**
-	 * Create a client with a default Authorization header.
-	 *
-	 * @param string $username
-	 * @param string $password
-	 * @return \Symfony\Bundle\FrameworkBundle\Client
-	 */
-	protected function createAuthenticatedUser(string $username, string $password = 'password')
-	{
-		$client = static::createClient();
-
-        $crawler = $client->request(
-        	'POST',
-        	'/api/login',
-        	[],
-	        [],
-	        [
-				'CONTENT_TYPE' => 'application/json'
-			],
-			json_encode([
-	        	'username' => $username,
-	        	'password' => $password,
-	        ])
-	    );
-
-	    return $client;
-	}
-
 	/**
 	 * Test a successful login.
 	 * 
@@ -43,7 +16,7 @@ class LoginUserTest extends WebTestCase
 	 */
     public function testSuccessfulUserLogin()
     {
-    	$client = $this->createAuthenticatedUser('test@example.com');
+    	$client = UserAuthentication::createAuthenticatedUser('test@example.com');
 
         // Assert that the response status code is 200 (HTTP_OK)
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
@@ -64,7 +37,7 @@ class LoginUserTest extends WebTestCase
 	 */
     public function testFailedUserLogin()
     {
-    	$client = $this->createAuthenticatedUser('test-fail@example.com');
+    	$client = UserAuthentication::createAuthenticatedUser('test-fail@example.com');
 
         // Assert that the response status code is 422 (HTTP_UNPROCESSABLE_ENTITY)
         $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
