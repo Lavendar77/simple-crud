@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use App\Tests\Library\UserAuthentication;
 
-class UserProfileTest extends WebTestCase
+class ProfileControllerTest extends WebTestCase
 {
 	/**
      * Test an authenticated access to a user profile.
@@ -50,5 +50,8 @@ class UserProfileTest extends WebTestCase
 
         // Assert that the response status code is 401 (HTTP_UNAUTHORIZED)
         $this->assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
+
+        // Assert that the "Content-Type" header is "application/json"
+        $this->assertResponseHeaderSame('Content-Type', 'application/json');
     }
 }

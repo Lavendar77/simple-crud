@@ -6,7 +6,7 @@ use Faker;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class RegisterUserTest extends WebTestCase
+class RegisterControllerTest extends WebTestCase
 {
 	/**
 	 * Test the successful registration of a user.
@@ -39,11 +39,6 @@ class RegisterUserTest extends WebTestCase
 
         // Assert that the "Content-Type" header is "application/json"
         $this->assertResponseHeaderSame('Content-Type', 'application/json');
-
-        $response = $client->getResponse()->getContent();
-        
-        // Assert that the response contains a token
-        $this->assertStringContainsString('token', $response);
     }
 
     /**
@@ -77,10 +72,5 @@ class RegisterUserTest extends WebTestCase
 
         // Assert that the "Content-Type" header is "application/json"
         $this->assertResponseHeaderSame('Content-Type', 'application/json');
-
-        $response = $client->getResponse()->getContent();
-        
-        // Assert that the response contains the errors
-        $this->assertStringContainsString('errors', $response);
     }
 }

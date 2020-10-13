@@ -7,7 +7,7 @@ use App\Tests\Library\UserAuthentication;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class LoginUserTest extends WebTestCase
+class LoginControllerTest extends WebTestCase
 {
 	/**
 	 * Test a successful login.
@@ -23,11 +23,6 @@ class LoginUserTest extends WebTestCase
 
         // Assert that the "Content-Type" header is "application/json"
         $this->assertResponseHeaderSame('Content-Type', 'application/json');
-
-        $response = $client->getResponse()->getContent();
-        
-        // Assert that the response contains a token
-        $this->assertStringContainsString('token', $response);
     }
 
     /**
@@ -44,10 +39,5 @@ class LoginUserTest extends WebTestCase
 
         // Assert that the "Content-Type" header is "application/json"
         $this->assertResponseHeaderSame('Content-Type', 'application/json');
-
-        $response = $client->getResponse()->getContent();
-        
-        // Assert that the response contains the errors
-        $this->assertStringContainsString('errors', $response);
     }
 }
