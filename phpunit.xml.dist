@@ -16,8 +16,10 @@
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>tests</directory>
+        <testsuite name="Simple CRUD Test Suite">
+            <file>tests/Controller/Api/Auth/RegisterControllerTest.php</file>
+            <file>tests/Controller/Api/Auth/LoginControllerTest.php</file>
+            <file>tests/Controller/Api/ProfileControllerTest.php</file>
         </testsuite>
     </testsuites>
 
