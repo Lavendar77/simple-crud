@@ -13,7 +13,7 @@ class UserAuthentication extends WebTestCase
 	 * @param string $password
 	 * @return \Symfony\Bundle\FrameworkBundle\Client
 	 */
-	public static function createAuthenticatedUser(string $username, string $password = 'password')
+	public static function createAuthenticatedUser(string $email, string $password = 'password')
 	{
 		$client = static::createClient();
 
@@ -26,7 +26,7 @@ class UserAuthentication extends WebTestCase
 				'CONTENT_TYPE' => 'application/json'
 			],
 			json_encode([
-	        	'username' => $username,
+				'username' => $email,
 	        	'password' => $password,
 	        ])
 	    );
