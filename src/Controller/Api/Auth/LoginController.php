@@ -47,7 +47,7 @@ class LoginController extends AbstractController
             'email' => $request->get('email')
         ]);
 
-        if (!$user || !$this->passwordEncoder->isPasswordValid($user, $request->get('password'))) {
+        if (!$user OR !$this->passwordEncoder->isPasswordValid($user, $request->get('password'))) {
             return new JsonResponse([
                 'status' => false,
                 'message' => 'The provided credentials are incorrect',
