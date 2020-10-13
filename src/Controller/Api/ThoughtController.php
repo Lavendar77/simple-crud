@@ -48,6 +48,7 @@ class ThoughtController extends AbstractController
         ]);
 
         return new JsonResponse([
+            'status' => true,
         	'message' => 'Thoughts fetched successfully.',
         	'data' => [
 	        	'thoughts' => $thoughts
@@ -74,6 +75,7 @@ class ThoughtController extends AbstractController
     	$this->entityManagerInterface->flush();
 
     	return new JsonResponse([
+            'status' => true,
         	'message' => 'Thought created successfully.',
         	'data' => [
 	        	'thought' => $thought
@@ -98,12 +100,14 @@ class ThoughtController extends AbstractController
 
     	if (!$thought) {
     		return new JsonResponse([
+                'status' => false,
 	        	'message' => 'Resource does not exist.',
                 'data' => null
 	        ], Response::HTTP_NOT_FOUND);
     	}
 
     	return new JsonResponse([
+            'status' => true,
         	'message' => 'Thought fetched successfully.',
         	'data' => [
 	        	'thought' => $thought
@@ -129,6 +133,7 @@ class ThoughtController extends AbstractController
 
     	if (!$thought) {
     		return new JsonResponse([
+                'status' => false,
 	        	'message' => 'Resource does not exist.',
                 'data' => null
 	        ], Response::HTTP_NOT_FOUND);
@@ -140,6 +145,7 @@ class ThoughtController extends AbstractController
     	$this->entityManagerInterface->flush();
 
     	return new JsonResponse([
+            'status' => true,
         	'message' => 'Thought updated successfully.',
         	'data' => [
 	        	'thought' => $thought
@@ -164,6 +170,7 @@ class ThoughtController extends AbstractController
 
     	if (!$thought) {
     		return new JsonResponse([
+                'status' => false,
 	        	'message' => 'Resource does not exist.',
                 'data' => null
 	        ], Response::HTTP_NOT_FOUND);
@@ -173,6 +180,7 @@ class ThoughtController extends AbstractController
 		$this->entityManagerInterface->flush();
 
     	return new JsonResponse([
+            'status' => true,
         	'message' => 'Thought deleted successfully.',
             'data' => null
         ]);

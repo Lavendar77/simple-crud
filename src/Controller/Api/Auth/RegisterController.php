@@ -63,7 +63,11 @@ class RegisterController extends AbstractController
         $errors = $this->validatorInterface->validate($user);
         if (count($errors) > 0) {
             return new JsonResponse([
-                'errors' => (string) $errors
+                'status' => false,
+                'message' => 'Validation Errors',
+                'data' => [
+                    'errors' => (string) $errors
+                ]
             ], Response::HTTP_BAD_REQUEST);
         }
 
@@ -73,11 +77,12 @@ class RegisterController extends AbstractController
         $token = $this->JWTManager->create($user);
 
         return new JsonResponse([
+            'status' => true,
         	'message' => 'Registration successful.',
         	'data' => [
                 'user' => $user,
                 'token' => $token
             ]
-        ]);
+        ], Response::HTTP_CREATED);
     }
 }

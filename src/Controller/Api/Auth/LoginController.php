@@ -49,18 +49,23 @@ class LoginController extends AbstractController
 
         if (!$user || !$this->passwordEncoder->isPasswordValid($user, $request->get('password'))) {
             return new JsonResponse([
-                'email' => 'The provided credentials are incorrect.'
+                'status' => false,
+                'message' => 'The provided credentials are incorrect',
+                'data' => [
+                    'errors' => 'Email or password does not exist'
+                ]
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $token = $this->JWTManager->create($user);
 
         return new JsonResponse([
+            'status' => true,
         	'message' => 'Login was successful.',
         	'data' => [
                 'user' => $user,
                 'token' => $token
             ]
-        ]);
+        ], Response::HTTP_OK);
     }
 }

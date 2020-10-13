@@ -21,6 +21,7 @@ class ProfileController extends AbstractController
         $user = $this->getUser();
 
         return new JsonResponse([
+            'status' => true,
             'message' => 'Profile fetched successfully.',
             'data' => [
                 'user' => $user
