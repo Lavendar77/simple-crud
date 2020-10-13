@@ -16,7 +16,7 @@ class LoginControllerTest extends WebTestCase
 	 */
     public function testSuccessfulUserLogin()
     {
-    	$client = UserAuthentication::createAuthenticatedUser('test@example.com');
+    	$client = UserAuthentication::createAuthenticatedUser('test@example.com', 'password');
 
         // Assert that the response status code is 200 (HTTP_OK)
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
@@ -32,7 +32,7 @@ class LoginControllerTest extends WebTestCase
 	 */
     public function testFailedUserLogin()
     {
-    	$client = UserAuthentication::createAuthenticatedUser('test-fail@example.com');
+    	$client = UserAuthentication::createAuthenticatedUser('test-fail@example.com', 'passwords');
 
         // Assert that the response status code is 422 (HTTP_UNPROCESSABLE_ENTITY)
         $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
