@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Api\Auth;
+namespace App\Tests\Controller\Api\Auth;
 
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
