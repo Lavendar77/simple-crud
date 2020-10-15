@@ -2,7 +2,6 @@
 
 namespace App\Tests\Controller\Api;
 
-use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use App\Tests\Library\UserAuthentication;
@@ -16,7 +15,7 @@ class ProfileControllerTest extends WebTestCase
      */
     public function testSuccessfulAccessToProfile()
     {
-        $client = UserAuthentication::createAuthenticatedUser('test@example.com', 'password');
+        $client = $client = UserAuthentication::createAuthenticatedUser($_ENV['TEST_USER_EMAIL'], $_ENV['TEST_USER_PASSWORD']);
         $data = json_decode($client->getResponse()->getContent());
 
        	$client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $data->token));
