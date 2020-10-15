@@ -57,9 +57,23 @@ symfony serve:start --no-tls`
 Okay, so testing has been stressful and quite annoying to be frank 🙄<br>
 But we'll pull through 🚀
 
+## Steps to take
+1. Edit your `.env.local` file (duplicate `.env` into `.env.local` if you haven't done so already)<br>
+`APP_ENV=test`
+2. Duplicate `.env.test` into `.env.test.local`<br>
+3. Set up your test database<br>
+`php bin/console doctrine:database:create`
+4. Load up the fixtures<br>
+`php bin/console doctrine:fixtures:load`
+5. Run the tests<br>
+`php bin/phpunit`
+
 ## Functional Tests
-For now, only functional tests are available. Codebase is still a bit buggy, but one step at a time.
-- Registration
+For now, only functional tests are available. Codebase is still a bit buggy, but one step at a time.<br>
+Please set up your **TEST_USER_EMAIL** and **TEST_USER_PASSWORD** in your `.env.test.local`.
+1. Registration<br>
 Testing for both successful and failed requests.
-- Login
+2. Login<br>
 Testing for both successful and failed requests.
+3. Profile Access<br>
+4. Main CRUD [Thoughts]
