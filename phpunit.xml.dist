@@ -20,6 +20,7 @@
             <file>tests/Controller/Api/Auth/RegisterControllerTest.php</file>
             <file>tests/Controller/Api/Auth/LoginControllerTest.php</file>
             <file>tests/Controller/Api/ProfileControllerTest.php</file>
+            <file>tests/Controller/Api/ThoughtControllerTest.php</file>
         </testsuite>
     </testsuites>
 
