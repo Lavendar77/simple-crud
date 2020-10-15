@@ -53,7 +53,7 @@ class ThoughtController extends AbstractController
         	'data' => [
 	        	'thoughts' => $thoughts
 	        ]
-        ]);
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -112,7 +112,7 @@ class ThoughtController extends AbstractController
         	'data' => [
 	        	'thought' => $thought
 	        ]
-        ]);
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -150,7 +150,7 @@ class ThoughtController extends AbstractController
         	'data' => [
 	        	'thought' => $thought
 	        ]
-        ]);
+        ], Response::HTTP_ACCEPTED);
     }
 
     /**
@@ -183,6 +183,6 @@ class ThoughtController extends AbstractController
             'status' => true,
         	'message' => 'Thought deleted successfully.',
             'data' => null
-        ]);
+        ], Response::HTTP_NO_CONTENT);
     }
 }
